@@ -1,9 +1,9 @@
+mod area;
 mod guess;
 mod square;
-mod area;
 
 fn main() {
     guess::new_game();
-    square::draw(6, 12, "#");
+    square::draw(32, String::from("#"));
     area::calculate(10, 2)
 }

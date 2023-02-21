@@ -1,16 +1,37 @@
-pub fn draw(cols: u8, rows: u8, print: &str) {
-    for x in 1..=rows {
-        print!("{} ", print);
+struct Square {
+    size: u8,
+    char: String,
+}
 
-        for y in 1..=cols {
+impl Square {
+    fn draw_char(&self, ln: bool) {
+        if ln {
+            println!("{} ", &self.char)
+        } else {
+            print!("{} ", &self.char)
+        }
+    }
+
+    fn draw_blank(&self) {
+        print!("  ")
+    }
+}
+
+pub fn draw(size: u8, char: String) {
+    let square = Square { size, char };
+
+    for x in 1..=size {
+        square.draw_char(false);
+
+        for y in 1..=square.size {
             match x {
-                1 => print!("{} ", print),
-                _ if x == rows => print!("{} ", print),
-                _ => print!("  "),
+                1 => square.draw_char(false),
+                _ if x == square.size => square.draw_char(false),
+                _ => square.draw_blank(),
             };
 
-            if y == cols {
-                println!("{}", print)
+            if y == square.size {
+                square.draw_char(true)
             }
         }
     }
