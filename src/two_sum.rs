@@ -1,14 +1,15 @@
-pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
-    let length = nums.len();
-    let mut result: Vec<i32> = vec![];
+use std::collections::HashMap;
 
-    for x in 0..length {
-        for y in 0..length {
-            if x != y && (nums[x] + nums[y] == target) {
-                result.push(nums[x] as i32);
-            }
+pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
+    let mut hash_map = HashMap::with_capacity(nums.len());
+
+    for (i, &num) in nums.iter().enumerate() {
+        match hash_map.get(&num) {
+            Some(&j) => return vec![i as i32, j as i32],
+            None => {
+                hash_map.insert(target - num, i);
+            },
         }
     }
-
-    return result;
+    unreachable!();
 }
